@@ -2,6 +2,7 @@ package Uppgift3;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 public class FifteenPuzzelGame extends JFrame {
 
@@ -83,6 +84,24 @@ public class FifteenPuzzelGame extends JFrame {
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 }
+
+    public void shuffledButtons(JButton[][] jButtons) {
+
+        Random random = new Random();
+        for (int raw = 0; raw < 4; raw++) {
+            for (int column = 0; column < 4; column++) {
+                int shuffledRaw = random.nextInt(raw + 1);
+                int shuffledColumn = random.nextInt(column + 1);
+
+                JButton shuffledJbuttons = jButtons[raw][column];
+                jButtons[raw][column] = jButtons[shuffledRaw][shuffledColumn];
+                jButtons[shuffledRaw][shuffledColumn] = shuffledJbuttons;
+                jPanel.add(jButtons[raw][column]);
+            }
+        }
+
+        jPanel.updateUI();
+    }
 
     public static void main(String[] args) {
         FifteenPuzzelGame Game = new FifteenPuzzelGame();
