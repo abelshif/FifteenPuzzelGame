@@ -102,7 +102,53 @@ public class FifteenPuzzelGame extends JFrame {
 
         jPanel.updateUI();
     }
+    public void moves(JPanel jPanel, JButton[][] jButtons, JButton jButton) {
 
+        for (int raw = 0; raw < jButtons.length; raw++) {
+            for (int column = 0; column < jButtons[raw].length; column++) {
+
+                if (jButtons[raw][column].getBackground() == Color.BLUE) {
+                    System.out.println("Blue button: " + jButtons[raw][column].getX() + "  " + jButtons[raw][column].getY());
+                    System.out.println("Button clicked: " + jButton.getX() + "  " + jButton.getY() + "\n");
+
+                    if (((jButtons[raw][column].getX() == jButton.getX()) && ((jButton.getY() - jButtons[raw][column].getY() <= 147) && (jButton.getY() - jButtons[raw][column].getY()) >= -147))
+                            || ((jButtons[raw][column].getY() == jButton.getY()) && ((jButton.getX() - jButtons[raw][column].getX()) <= 147) && (jButton.getX() - jButtons[raw][column].getX()) >= -147)) {
+                        jButtons[raw][column].setVisible(true);
+                        jButtons[raw][column].setText(jButton.getText());
+                        jButtons[raw][column].setBackground(Color.CYAN);
+
+                        jButton.setBackground(Color.blue);
+                        jButton.setText(" ");
+                        jButton.setVisible(false);
+                    }
+
+                    SwingUtilities.updateComponentTreeUI(jPanel);
+                }
+            }
+        }
+    }
+
+    public boolean checkBoard(JButton[][] jButtons) {
+        int buttonText = 1;
+
+        for (int raw = 0; raw < 4; raw++) {
+            for (int column = 0; column < 4; column++) {
+                if (jButtons[raw][column].getText().equals(Integer.toString(buttonText))) {
+                    buttonText++;
+                    if (buttonText == 15)
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void resetGame(JButton nyttSpelButton, JButton finishButton) {
+        nyttSpelButton.setEnabled(true);
+        nyttSpelButton.setBackground(Color.yellow);
+        finishButton.setEnabled(false);
+        finishButton.setBackground(Color.GRAY);
+    }
     public static void main(String[] args) {
         FifteenPuzzelGame Game = new FifteenPuzzelGame();
 
