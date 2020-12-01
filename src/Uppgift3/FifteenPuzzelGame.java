@@ -2,6 +2,8 @@ package Uppgift3;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 
 public class FifteenPuzzelGame extends JFrame {
@@ -44,7 +46,7 @@ public class FifteenPuzzelGame extends JFrame {
         nyttSpelButton.setForeground(Color.black);
         nyttSpelButton.setSize(140, 140);
         nyttSpelButton.setHorizontalAlignment(0);
-
+        nyttSpelButton.addMouseListener(ml1);
 
         jPanel1.add(finishButton, BorderLayout.AFTER_LAST_LINE);
         finishButton.setText("Klart");
@@ -54,6 +56,7 @@ public class FifteenPuzzelGame extends JFrame {
         finishButton.setHorizontalAlignment(0);
         finishButton.setEnabled(false);
         finishButton.setBackground(Color.lightGray);
+        finishButton.addMouseListener(ml2);
 
         int count = 1;
         for (int raw = 0; raw < 4; raw++) {
@@ -97,6 +100,8 @@ public class FifteenPuzzelGame extends JFrame {
                 jButtons[raw][column] = jButtons[shuffledRaw][shuffledColumn];
                 jButtons[shuffledRaw][shuffledColumn] = shuffledJbuttons;
                 jPanel.add(jButtons[raw][column]);
+                jButtons[shuffledRaw][shuffledColumn].addMouseListener(ml3);
+
             }
         }
 
@@ -149,6 +154,41 @@ public class FifteenPuzzelGame extends JFrame {
         finishButton.setEnabled(false);
         finishButton.setBackground(Color.GRAY);
     }
+
+    MouseAdapter ml1 = new MouseAdapter() {
+
+        public void mouseClicked(MouseEvent e) {
+            shuffledButtons(jButtons);
+            jPanel.setEnabled(true);
+            nyttSpelButton.setBackground(Color.LIGHT_GRAY);
+            nyttSpelButton.setEnabled(true);
+            finishButton.setEnabled(true);
+        }
+    };
+
+    MouseAdapter ml2 = new MouseAdapter() {
+
+        public void mouseClicked(MouseEvent e) {
+
+            if (checkBoard(jButtons)) {
+                JOptionPane.showMessageDialog(jPanel, "Grattis ! du har vunnit !");
+                resetGame(nyttSpelButton, finishButton);
+
+            }
+        }
+    };
+
+    MouseAdapter ml3 = new MouseAdapter() {
+
+        public void mouseClicked(MouseEvent e) {
+            Object source = e.getSource();
+            if (source instanceof JButton)
+                moves(jPanel, jButtons, (JButton) source);
+        }
+    };
+
+
+
     public static void main(String[] args) {
         FifteenPuzzelGame Game = new FifteenPuzzelGame();
 
