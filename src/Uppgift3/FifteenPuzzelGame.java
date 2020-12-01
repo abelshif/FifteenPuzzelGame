@@ -54,6 +54,34 @@ public class FifteenPuzzelGame extends JFrame {
         finishButton.setEnabled(false);
         finishButton.setBackground(Color.lightGray);
 
+        int count = 1;
+        for (int raw = 0; raw < 4; raw++) {
+            for (int column = 0; column < 4; column++) {
+
+                jButtons[raw][column] = new JButton();
+                jButtons[raw][column].setBackground(Color.cyan);
+                jButtons[raw][column].setForeground(Color.black);
+                jButtons[raw][column].setText(String.valueOf((count)));
+                jButtons[raw][column].setVisible(true);
+
+                if (raw == 3 && column == 3) {
+                    jButtons[raw][column].setText("");
+                    jButtons[raw][column].setBackground(Color.blue);
+                    jButtons[raw][column].setVisible(false);
+                }
+
+                jPanel.add(jButtons[raw][column]);
+                jPanel.setVisible(true);
+                count++;
+            }
+        }
+
+        jFrame.add(jPanelMain);
+        jPanelMain.add(jPanel);
+        jPanelMain.add(jPanel1);
+        jFrame.pack();
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 }
 
     public static void main(String[] args) {
