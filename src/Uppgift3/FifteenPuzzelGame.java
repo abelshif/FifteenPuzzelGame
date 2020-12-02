@@ -28,13 +28,13 @@ public class FifteenPuzzelGame extends JFrame {
         jPanelMain.setBackground(Color.gray);
         jPanelMain.setLayout(new FlowLayout());
 
-        //new panel1 created
+        //new panel created
         jPanel.setPreferredSize(new Dimension(550, 550));
         jPanel.setBackground(Color.BLUE);
         jPanel.setLayout(new GridLayout(4, 4));
         jPanel.setEnabled(false);
 
-
+        //new panel1 created
         jPanel1.setPreferredSize(new Dimension(550, 50));
         jPanel1.setLayout(new GridLayout(1, 0));
         jPanel1.setBackground(Color.BLUE);
